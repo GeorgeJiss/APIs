@@ -16,7 +16,7 @@ def get_jobs():
             site_name=["indeed", "linkedin", "naukri"],
             search_term=search_term,
             location=location,
-            results_wanted=100,
+            results_wanted=25,
         )
         
         results = jobs_df.to_dict('records')
