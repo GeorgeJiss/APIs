@@ -1,0 +1,5 @@
+Flask
+pandas
+jobspy
+gunicorn
+jsonify
