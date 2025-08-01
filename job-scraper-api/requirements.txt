@@ -1,5 +1,5 @@
 Flask
 pandas
-jobspy
+python-jobspy
 gunicorn
 jsonify

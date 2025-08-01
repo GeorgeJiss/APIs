@@ -1,24 +1,26 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 from jobspy import scrape_jobs
-import jsonify
 
 app = Flask(__name__)
 
 @app.route('/scrape', methods=['GET'])
 def get_jobs():
+    # Get parameters from the URL, with default values if not provided
+    search_term = request.args.get('search_term', 'software engineer')
+    location = request.args.get('location', 'India')
+    
+    print(f"Scraping for '{search_term}' in '{location}'...")
+
     try:
         jobs_df = scrape_jobs(
             site_name=["indeed", "linkedin", "naukri"],
-            search_term="software engineer",
-            location="India",
-            results_wanted=25,
-            hours_old=48,
-            country_indeed='IND'
+            search_term=search_term,
+            location=location,
+            results_wanted=25
         )
         
         results = jobs_df.to_dict('records')
         print(f"Found {len(results)} jobs. Sending response.")
-        
         return jsonify(results)
 
     except Exception as e:
@@ -26,5 +28,4 @@ def get_jobs():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    # '0.0.0.0' makes the server accessible from your local network (and Docker)
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
