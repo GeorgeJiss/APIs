@@ -6,14 +6,14 @@ app = Flask(__name__)
 @app.route('/scrape', methods=['GET'])
 def get_jobs():
     # Get parameters from the URL, with default values if not provided
-    search_term = request.args.get('search_term', 'software engineer', 'zip_recruiter', 'google', 'glassdoor', 'bayt', 'naukri', 'bdjobs')
+    search_term = request.args.get('search_term', 'software engineer',)
     location = request.args.get('location', 'India')
     
     print(f"Scraping for '{search_term}' in '{location}'...")
 
     try:
         jobs_df = scrape_jobs(
-            site_name=["indeed", "linkedin", "naukri"],
+            site_name=["indeed", "linkedin", "naukri", "zip_recruiter", "google", "glassdoor", "bayt", "naukri", "bdjobs"],
             search_term=search_term,
             location=location,
             results_wanted=25,
