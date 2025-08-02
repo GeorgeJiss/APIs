@@ -13,7 +13,7 @@ def get_jobs():
 
     try:
         jobs_df = scrape_jobs(
-            site_name=["indeed", "linkedin", "naukri", "zip_recruiter", "google", "glassdoor", "bayt", "naukri", "bdjobs"],
+            site_name=["indeed", "linkedin", "naukri", "zip_recruiter", "google", "glassdoor", "bayt", "naukri",],
             search_term=search_term,
             location=location,
             results_wanted=25,
